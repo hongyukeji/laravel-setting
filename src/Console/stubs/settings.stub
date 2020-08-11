@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateSettingClassTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('setting_table', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->nullable()->comment('标题');
+            $table->string('description')->nullable()->comment('描述');
+            $table->string('name')->nullable()->comment('名称');
+            $table->text('value')->nullable()->comment('内容');
+            $table->string('group')->nullable()->comment('组');
+            $table->string('field_type')->nullable()->comment('字段类型');
+            $table->text('field_value')->nullable()->comment('字段值');
+            $table->boolean('lock')->nullable()->comment('锁定:0=>否;1=>是');
+            $table->unsignedInteger('sorting')->nullable()->comment('排序');
+            $table->unsignedTinyInteger('status')->nullable()->comment('状态:0=>关闭;1=>开启;');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('setting_table');
+    }
+}
